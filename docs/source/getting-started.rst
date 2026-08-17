@@ -10,7 +10,7 @@ Install the Library
 
 Install the serialtek python library with::
 
-    $ python -m pip install serialtek
+    $ python -m pip install git+https://github.com/serialtek/serialtek-python-library
 
 
 Log In to a Kodiak
