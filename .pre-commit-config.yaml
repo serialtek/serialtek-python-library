@@ -1,0 +1,33 @@
+# See https://pre-commit.com for more information
+fail_fast: true
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  -   id: trailing-whitespace
+      exclude: ^docs/source/_static
+  -   id: end-of-file-fixer
+      exclude: ^docs/source/_static
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.0.292
+  hooks:
+    -   id: ruff
+        name: lint
+        args: [--fix, --exit-non-zero-on-fix, --show-fixes]
+        files: 'src/.*.py'
+
+-   repo: local
+    hooks:
+    -   id: format
+        name: format
+        entry: uv run python ./scripts/precommit-fmt.py
+        language: system
+        pass_filenames: false
+        types: [python]
+    -   id: typecheck
+        name: typecheck
+        entry: uv run python ./scripts/precommit-check.py
+        language: system
+        pass_filenames: false
+        types: [python]
