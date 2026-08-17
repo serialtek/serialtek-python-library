@@ -403,6 +403,28 @@ class NvmeBuilder(CursorBase[AnyTransaction]):
     def _response(self, data: Json) -> CursorResponse[AnyTransaction]:
         return TransactionBuilderResponse(data, ModelContext(self.Ticks.base))
 
+class DoeCursor(CursorBase[CursorEvent]):
+    """A cursor that can be used to iterate over events in a trace.
+
+    The main way to create a cursor is from an open :py:class:`~.trace.Trace` using the
+    :py:meth:`.Trace.open_doe_cursor` method::
+
+        with kodiak.open_trace("/media/NVMeDrive0/my_trace.sttrace") as trace:
+            with trace.open_doe_cursor("000.000.045.123.5") as cur:
+                # Do something with cur...
+
+    A cursor can be used as a context manager, as shown above. If it is not, then
+    :py:meth:`.CursorBase.close()` should be called when done.
+
+    See :py:class:`.CursorBase` for a description of methods available to an
+    DoeCursor.
+    """
+
+    _path = "/doe_cursors"
+
+    def _response(self, data: Json) -> CursorResponse[CursorEvent]:
+        return EventCursorResponse(data, ModelContext(self.Ticks.base))
+
 class CursorContext(JsonBacked, init = False):
     id: str
     direction: Direction

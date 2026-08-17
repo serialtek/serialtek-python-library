@@ -15,7 +15,7 @@ from serialtek.types import undocumented_constructor
 from serialtek.util.json import JsonBacked
 
 from ._model import ModelContext
-from .cursor import Direction, EventCursor, NvmeBuilder, PcieBuilder
+from .cursor import Direction, DoeCursor, EventCursor, NvmeBuilder, PcieBuilder
 from .errors import RequestFailedError
 from .timestamp import Ticks, TicksBaseFactory, TicksLike
 from .util import Json, exclude_none, validate_response
@@ -489,6 +489,35 @@ class Trace:
         return NvmeBuilder.open(
             self,
             builder_id,
+            timestamp,
+            direction,
+            filter=filter,
+            decodes=decodes,
+            ticks_type=self.Ticks,
+            model_context=self._model_context,
+        )
+
+    def open_doe_cursor(
+        self,
+        timestamp: Union[TicksLike, Bookmark] = 0,
+        direction: Direction = Direction.Forward,
+        *,
+        filter: Optional[Union[Filter, Json]] = None,
+        decodes: Optional[FieldDecodes] = None,
+        cursor_id: Optional[str] = None,
+    ) -> DoeCursor:
+        """Open a DOE cursor on this trace with the given settings.
+
+        :param timestamp: The timestamp this cursor should be created.
+        :param direction: The direction for this cursor to iterate in.
+        :param filter: Optionally create this cursor with a filter.
+        :param decodes: Optionally initialize field decodes for this cursor.
+        :param cursor_id: An identifier for this cursor. If not sepcified, a random,
+            unused id will be generated.
+        """
+        return DoeCursor.open(
+            self,
+            cursor_id,
             timestamp,
             direction,
             filter=filter,
