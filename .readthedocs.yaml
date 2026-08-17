@@ -1,0 +1,18 @@
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.12"
+  jobs:
+    post_create_environment:
+      - pip install uv
+    post_install:
+      - uv pip install --python $READTHEDOCS_VIRTUALENV_PATH/bin/python --group dev .
+
+sphinx:
+  configuration: docs/source/conf.py
+  fail_on_warning: false
