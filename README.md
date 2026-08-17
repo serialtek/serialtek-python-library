@@ -1,5 +1,9 @@
 # SerialTek Python Library
 
+[![Documentation Status](https://app.readthedocs.org/projects/serialtek-python-library/badge/?version=latest)](https://serialtek-python-library.readthedocs.io/en/latest/?badge=latest)
+[![PyPI - Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://github.com/serialtek/serialtek-python-library)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](/LICENSE)
+
 The SerialTek Python library provides functions for automating work with Kodiak
 analyzers and testers.
 
