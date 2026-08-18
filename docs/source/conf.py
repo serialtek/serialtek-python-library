@@ -12,9 +12,10 @@ builtins.__sphinx_build__ = True
 
 from docutils import nodes
 from sphinx.util.docutils import SphinxRole
+from pathlib import Path
 
 project = "SerialTek"
-copyright = "2023, SerialTek"
+copyright = Path(__file__).resolve().parent.parent.parent.joinpath("NOTICE").read_text().removeprefix("Copyright ")
 author = "SerialTek"
 
 # -- General configuration ---------------------------------------------------
