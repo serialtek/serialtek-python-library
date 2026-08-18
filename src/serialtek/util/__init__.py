@@ -64,6 +64,9 @@ class Base91Data(str):
         else:
             return cls(v)
 
+    def hex(self, sep: str = "", bytes_per_sep: int =1) -> str:
+        return self.bytes.hex(sep, bytes_per_sep=bytes_per_sep)
+
     @cached_property
     def bytes(self) -> bytes:
         """Return the decoded binary value of this data.

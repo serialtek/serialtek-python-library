@@ -173,3 +173,13 @@ NVMe transactions include an ``nvme_type`` field with a human-readable name
 (eg ``"NVMe Submission Doorbell"``). Some transactions returned by the NVMe
 builder (like the PCIe posted write shown above) aren't recognized as part of
 an NVMe transaction and are returned as-is, without an ``nvme_type`` field.
+
+Examples
+--------
+
+.. dropdown:: :icon:`file code` Example: Export TLPs as HTML
+
+    :download:`export-table.py <../../examples/export-table.py>`
+
+    .. literalinclude:: ../../examples/export-table.py
+        :language: python

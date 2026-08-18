@@ -1,8 +1,18 @@
+"""Example of capturing a trace using trigger-based stop.
+
+In order to use this example, you will need to create capture settings. See
+http://serialtek-python-library.readthedocs.io/en/latest/library/howto/library-capture.html
+for details.
+
+The created capture settings should use an automatic stop mode, ie "Stop When Full" or
+"Trigger".
+"""
 import time
 
 from serialtek import Kodiak
 
-# Change these values to match your setup.
+# Log into a kodiak using `stcli login` before running this script, and this line will
+# use that session.
 kodiak = Kodiak()
 capture_settings_path = "CaptureSettings-trigger-configured.json"
 save_path = kodiak.Path("/media/NVMeDrive0/example-auto-stop-capture.sttrace")
